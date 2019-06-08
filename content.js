@@ -1,37 +1,46 @@
-// Inform the background page that 
-// this tab should have a page-action.
 chrome.runtime.sendMessage({
   from: 'content',
   subject: 'showPageAction',
 });
 
-// Listen for messages from the popup.
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
-  // First, validate the message's structure.
   if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
-    // Collect the necessary data. 
-    // (For your specific requirements `document.querySelectorAll(...)`
-    //  should be equivalent to jquery's `$(...)`.)
 
     var Arr = [].slice.call(document.querySelectorAll('span[itemprop=name]')).slice(2, -1);
     var Content = ""
     for (var i = 0; i < Arr.length; i++) {
-      Content += Arr[i].innerHTML + " > ";
+      Content += i + 1 + '. <input type="checkbox" id="gro_cats_check_' + i + '" class="gro_cats_check" name="gro-' + Arr[i].innerText + '" value="' + Arr[i].innerText + '">' + Arr[i].innerText + '<br>';
     };
+    function getBrand() {
+      var Brand = document.getElementsByClassName('brand-link')[0]
+      if (Brand == undefined) { return "" } else { return document.getElementsByClassName('brand-link')[0].innerHTML }
+    }
+    function getPriceUnit() {
+      var PriceUnit = document.querySelectorAll('.price-unit > a')[0]
+      if (PriceUnit == undefined) { return "" } else { return document.querySelectorAll('.price-unit > a')[0].innerText }
+    }
+    function getFixPrice() {
+      var price = document.querySelector('.price-current > div').textContent
+      if (price.includes("$") === true) {
+        return price.split("$")[1]
+      } else if (price.includes("¢") === true) {
+        return price.split("¢")[0] / 100
+      }
+    }
     var domInfo = {
       state_title: document.getElementsByTagName('h1')[0].innerText,
-      state_price: document.querySelector('.price-current > div').textContent,
-      state_price_unit: document.querySelectorAll('.price-unit > a')[0].innerText,
+      state_price: getFixPrice(),
+      state_price_unit: getPriceUnit(),
       state_media: document.getElementsByClassName('image')[0].src,
       state_cats: Content,
       state_short_desc: document.getElementsByClassName('short_desc')[0].innerHTML,
       state_desc: document.getElementsByClassName('description')[0].innerHTML,
-      state_brand: document.getElementsByClassName('brand-link')[0].innerHTML,
-      state_url: window.location["href"]
+      state_brand: getBrand(),
+      state_url: window.location["href"],
+      state_long_desc: document.getElementsByClassName('description')[1].innerText,
+      state_bullets: document.getElementsByClassName('bullets')[0].innerText,
+      state_sku: document.getElementsByClassName('identifier-text')[1].innerHTML
     };
-
-    // Directly respond to the sender (popup), 
-    // through the specified callback.
     response(domInfo);
   }
 });

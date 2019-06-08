@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="popup.css">
+    <script src="popup.js"></script>
+    <script src="productPost.js"></script>
   </head>
 
   <body>
@@ -14,56 +16,88 @@
       <h3 class="box_title">Walmart Product Bot</h3>
       <h6 class="box_subtitle">Developed by @hmtkyn</h6>
     </div>
-    <div class="box_wrapper">
-      <div class="box_group">
-        <h4 class="box_label">Title</h4>
-        <textarea class="box_input" name="gro-title" id="gro_title" cols="50" rows="2"></textarea>
-      </div>
-      <div class="box_group">
-        <h4 class="box_label">Categories</h4>
-        <textarea class="box_input" name="gro-cats" id="gro_cats" cols="50" rows="2"></textarea>
-      </div>
-      <div class="box_group_row">
+    <div id="notif"></div>
+    <div class="box_content">
+      <!-- START = Aside -->
+      <div class="box_aside">
         <div class="box_group">
-          <h4 class="box_label">Price</h4>
-          <input class="box_input_row" type="text" name="gro-price" id="gro_price" value="">
+          <h4 class="box_label">Categories</h4>
+          <span class="box_input_row_long" contentEditable="false" id="gro_cats"></span>
+          <h4 class="box_label">Parent Category ID</h4>
+          <span class="box_input_row_long" contentEditable="true" id="gro_sub_cat"></span>
+          <a href="#" class="gro_btn" id="gro_post_cat">Create Category</a>
         </div>
         <div class="box_group">
-          <h4 class="box_label">Price Unit</h4>
-          <input class="box_input_row" type="text" name="gro-price-unit" id="gro_price_unit" value="">
-        </div>
-        <div class="box_group">
-          <h4 class="box_label">Brand</h4>
-          <input class="box_input_row" type="text" name="gro-brand" id="gro_brand" value="">
-        </div>
-        <div class="box_group">
-          <h4 class="box_label">Short Desc</h4>
-          <input class="box_input_row" type="text" name="gro-short-desc" id="gro_short_desc" value="">
-        </div>
-        <div class="box_group">
-          <h4 class="box_label">Desc</h4>
-          <input class="box_input_row" type="text" name="gro-desc" id="gro_desc" value="">
+          <h4 class="box_label">All Categories</h4>
+          <span class="box_input_row_long" contentEditable="false" id="gro_all_cats"></span>
+          <a href="#" class="gro_btn" id="gro_get_all_cats">Refresh</a>
         </div>
       </div>
-      <div class="box_group_row">
-        <div class="box_group">
-          <h4 class="box_label">Media URL</h4>
-          <textarea class="box_input" name="gro-media" id="gro_media" cols="50" rows="2"></textarea>
+      <!-- START = Wrapper -->
+      <div class="box_wrapper">
+        <div class="box_group_row">
+          <div class="box_group">
+            <h4 class="box_label">Title</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_title"></span>
+          </div>
         </div>
-        <div class="box_group">
-          <h4 class="box_label">Media Preview</h4>
-          <img class="gro_img" id="gro_media_preview" src="" alt="image" />
+        <div class="box_group_row">
+          <div class="box_group">
+            <h4 class="box_label">Price</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_price"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Price Unit</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_price_unit"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Brand</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_brand"></span>
+          </div>
         </div>
-        <div class="box_group">
-          <h4 class="box_label">Product Link</h4>
-          <a href="" class="box_url" id="gro_url" target="_blank" rel="noopener noreferrer">Go to product</a>
+        <div class="box_group_row">
+          <div class="box_group">
+            <h4 class="box_label">SKU</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_sku"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Short Desc</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_short_desc"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Desc</h4>
+            <span class="box_input_row" contentEditable="true" id="gro_desc"></span>
+          </div>
+        </div>
+        <div class="box_group_row">
+          <div class="box_group">
+            <h4 class="box_label">Product Description</h4>
+            <span class="box_input_row_50" contentEditable="true" id="gro_long_desc"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Product Features</h4>
+            <span class="box_input_row_50" contentEditable="true" id="gro_bullets"></span>
+          </div>
+        </div>
+        <div class="box_group_row">
+          <div class="box_group">
+            <h4 class="box_label">Product Link</h4>
+            <span class="box_input_row_25" contentEditable="true" id="gro_url"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Media URL</h4>
+            <span class="box_input_row_25" contentEditable="true" id="gro_media"></span>
+          </div>
+          <div class="box_group">
+            <h4 class="box_label">Media Preview</h4>
+            <img class="gro_img" id="gro_media_preview" src="" alt="image" />
+          </div>
         </div>
       </div>
     </div>
     <div class="box_footer">
-      <input class="box_button" type="submit" value="Submit" />
+      <input class="box_button" id="gro_submit" type="submit" value="Submit" />
     </div>
-    <script src="popup.js"></script>
   </body>
 
 </html>

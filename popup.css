@@ -84,7 +84,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 0.25rem 0;
+  margin: 0;
   padding: 0;
 }
 .box_group_row {
@@ -92,7 +92,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 0.25rem 0;
+  margin: 0;
   padding: 0;
 }
 .box_label {
@@ -146,6 +146,7 @@ body {
   max-height: 90px;
   width: 90px;
   object-fit: contain;
+  margin: 0.25rem;
 }
 .box_footer {
   display: flex;
@@ -173,7 +174,7 @@ body {
   background-color: #3b873e;
 }
 span#gro_all_cats {
-  height: 320px;
+  height: 160px;
   overflow-y: scroll;
 }
 span#gro_title {

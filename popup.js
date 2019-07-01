@@ -131,6 +131,7 @@ function postProduct() {
   var proDesc = document.getElementById("gro_long_desc").textContent;
   var proFeatures = document.getElementById("gro_bullets").textContent;
   var proMedia = document.getElementById("gro_media").textContent;
+  var proURL = document.getElementById("gro_url").innerHTML;
   function proCats() {
     var cats = document.querySelectorAll("#gro_all_cats > input:checked");
     var catsvalue = [];
@@ -149,6 +150,11 @@ function postProduct() {
     "description": proDescription,
     "short_description": proShortDescription,
     "categories": proCats(),
+    "meta_data": [{
+      "id": 33563,
+      "key": "pro_url",
+      "value": proURL
+    }],
     "images": [
       {
         "src": proMedia
@@ -161,14 +167,23 @@ function postProduct() {
   xhr.withCredentials = true;
 
   xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
+    if (this.readyState == 4 && this.status == 200) {
       console.log(this.responseText);
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, added product.</h4>";
       if (document.querySelectorAll("notif-cats-success").length >= 0) {
         setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 3000)
       }
-    } else if (this.status == 400 || this.status == 403 || this.status == 404) {
+    } else if (this.readyState == 4 && this.status == 400) {
       console.log(this.responseText);
+      console.log(this.status);
+      console.log("Aynı ürün ekli zaten");
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-warning'>Product already added.</h4>";
+      if (document.querySelectorAll("notif-cats-warning").length >= 0) {
+        setTimeout(function () { document.getElementById('notif-cats-warning').remove(); }, 3000)
+      }
+    } else if (this.status == 403 || this.status == 404) {
+      console.log(this.responseText);
+      console.log(this.status);
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed, could not add product.</h4>";
       if (document.querySelectorAll("notif-cats-error").length >= 0) {
         setTimeout(function () { document.getElementById('notif-cats-error').remove(); }, 3000)

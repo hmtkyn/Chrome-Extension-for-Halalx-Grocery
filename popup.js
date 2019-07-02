@@ -122,7 +122,7 @@ function postCategory() {
 // START = Create Product
 function postProduct() {
   var proTitle = document.getElementById("gro_title").textContent;
-  var proPrice = document.getElementById("gro_price").textContent;
+  var proPrice = parseFloat(document.getElementById("gro_price").textContent);
   var proPriceUnit = document.getElementById("gro_price_unit").textContent;
   var proBrand = document.getElementById("gro_brand").textContent;
   var proSKU = document.getElementById("gro_sku").textContent;
@@ -132,6 +132,13 @@ function postProduct() {
   var proFeatures = document.getElementById("gro_bullets").textContent;
   var proMedia = document.getElementById("gro_media").textContent;
   var proURL = document.getElementById("gro_url").innerHTML;
+  function proNewPrice() {
+    var x = Math.floor((Math.random() * 5) + 1);
+    console.log(x);
+    var newPrice = proPrice - (proPrice / 100) * x;
+    console.log(newPrice.toFixed(2).toString())
+    return newPrice.toFixed(2).toString()
+  }
   function proCats() {
     var cats = document.querySelectorAll("#gro_all_cats > input:checked");
     var catsvalue = [];
@@ -146,7 +153,7 @@ function postProduct() {
 
   var data = JSON.stringify({
     "name": proTitle,
-    "regular_price": proPrice,
+    "regular_price": proNewPrice(),
     "description": proDescription,
     "short_description": proShortDescription,
     "categories": proCats(),

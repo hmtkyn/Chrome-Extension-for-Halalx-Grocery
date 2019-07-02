@@ -1,6 +1,6 @@
 {
   "name": "WM Bot",
-  "version": "1.4",
+  "version": "1.5",
   "description": "WM Bot for Halalx Grocery",
   "permissions": [
     "activeTab",

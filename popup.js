@@ -167,7 +167,7 @@ function postProduct() {
   xhr.withCredentials = true;
 
   xhr.addEventListener("readystatechange", function () {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && this.status == 201) {
       console.log(this.responseText);
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, added product.</h4>";
       if (document.querySelectorAll("notif-cats-success").length >= 0) {

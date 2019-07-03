@@ -140,7 +140,7 @@ function postProduct() {
     return newPrice.toFixed(2).toString()
   }
   function proCats() {
-    var cats = document.querySelectorAll("#gro_all_cats > input:checked");
+    var cats = document.querySelectorAll("#gro_all_cats > span > input:checked");
     var catsvalue = [];
     var i = 0;
     for (i; i < cats.length; i++) {

@@ -75,7 +75,7 @@ function getAllCats() {
   var out = [];
   function myCatsFunc(arr) {
     for (var i = 0; i < arr.length; i++) {
-      out += i + 1 + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '">' + arr[i]["id"] + ' - ' + arr[i]["name"] + '<br>';
+      out += '<span class="pro-cat-item">' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '">' + arr[i]["id"] + ' - ' + arr[i]["name"] + '</span>';
     }
     document.getElementById("gro_all_cats").innerHTML = out;
   }
@@ -205,8 +205,28 @@ function postProduct() {
   xhr.send(data);
 }
 // END = Create Product
+// START = Search Category
+function catSearch() {
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById("gro_cat_search");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("gro_all_cats");
+  li = ul.getElementsByClassName("pro-cat-item");
+  for (i = 0; i < li.length; i++) {
+    a = li[i];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+// END = Search Category
 function main() {
   getAllCats();
+  catSearch();
+  document.getElementById("gro_cat_search").addEventListener("keyup", catSearch);
   document.getElementById("gro_get_all_cats").addEventListener("click", getAllCats);
   document.getElementById("gro_post_cat").addEventListener("click", postCategory);
   document.getElementById("gro_submit").addEventListener("click", postProduct);

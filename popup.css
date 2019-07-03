@@ -182,11 +182,28 @@ body {
   background-color: #3b873e;
 }
 span#gro_all_cats {
-  height: 160px;
+  height: 134px;
   overflow-y: scroll;
 }
 span#gro_title {
   width: 460px;
+}
+span.pro-cat-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  padding: 0;
+  margin: 0 0 0.1rem 0;
+}
+#gro_cat_search {
+  border: none;
+  background-color: #eee;
+  padding: 0.5rem;
+  margin: 0.25rem;
+  border-radius: 0.25rem;
+  width: 226px;
+  height: auto;
 }
 .gro_btn:hover,
 .gro_btn:active,

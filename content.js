@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     var Arr = [].slice.call(document.querySelectorAll('span[itemprop=name]')).slice(2, -1);
     var Content = ""
     for (var i = 0; i < Arr.length; i++) {
-      Content += i + 1 + '. <input type="checkbox" id="gro_cats_check_' + i + '" class="gro_cats_check" name="gro-' + Arr[i].innerText + '" value="' + Arr[i].innerText + '">' + Arr[i].innerText + '<br>';
+      Content += '<span class="gro_get_cat">' + i + '. <input type="checkbox" id="gro_cats_check_' + i + '" class="gro_cats_check" name="gro-' + Arr[i].innerText + '" value="' + Arr[i].innerText + '"><span class="gro_get_cat_inner">' + Arr[i].innerText + '</span></span>';
     };
     function getBrand() {
       var Brand = document.getElementsByClassName('brand-link')[0]

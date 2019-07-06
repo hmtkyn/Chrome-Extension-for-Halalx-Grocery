@@ -188,13 +188,18 @@ span#gro_all_cats {
 span#gro_title {
   width: 460px;
 }
-span.pro-cat-item {
+span.pro-cat-item,
+span.gro_get_cat {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: row;
   padding: 0;
   margin: 0 0 0.1rem 0;
+}
+span.gro_cat_text {
+  padding: 0;
+  margin: 0 0 0 0.25rem;
 }
 #gro_cat_search {
   border: none;

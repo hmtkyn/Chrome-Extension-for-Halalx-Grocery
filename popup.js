@@ -74,10 +74,31 @@ function getAllCats() {
 
   var out = [];
   function myCatsFunc(arr) {
+    var visibles = newcats();
+    var yokmu = true;
     for (var i = 0; i < arr.length; i++) {
-      out += '<span class="pro-cat-item">' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '">' + arr[i]["id"] + ' - ' + arr[i]["name"] + '</span>';
+      var c = "style='display:none;'";
+      for (var k = 0; k < visibles.length; k++) {
+        console.log(arr[i]["name"]);
+        console.log(visibles[k]);
+        if (arr[i]["name"] == visibles[k]) {
+          c = "checked";
+          yokmu = false;
+        }
+      }
+      console.log(c);
+      out += '<span class="pro-cat-item" ' + c + '>' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '" ' + c + '>' + arr[i]["id"] + '<span class="gro_cat_text">' + arr[i]["name"] + '</span></span>';
     }
     document.getElementById("gro_all_cats").innerHTML = out;
+    if (yokmu) { }
+  }
+  function newcats() {
+    var newcat = document.querySelectorAll(".gro_get_cat > .gro_get_cat_inner");
+    var arr = [];
+    for (var i = 0; i < newcat.length; i++) {
+      arr.push(newcat[i].innerHTML);
+    }
+    return arr;
   }
 }
 // END = Get Categories
@@ -85,7 +106,7 @@ function getAllCats() {
 function postCategory() {
   var data = new FormData();
 
-  var selected = document.querySelectorAll('#gro_cats > input:checked')[0].value;
+  var selected = document.querySelectorAll('#gro_cats > .gro_get_cat > input:checked')[0].value;
   var parent = parseFloat(document.getElementById('gro_sub_cat').textContent)
 
   data.append("name", selected);
@@ -149,7 +170,7 @@ function postProduct() {
     return catsvalue
   };
   var proShortDescription = "<b>Brand: </b>" + proBrand + "<br> <b>Price Unit: </b>" + proPriceUnit + "<br> <b>Info: </b>" + proinfoShortDesc + " " + proinfoDesc + ""
-  var proDescription = "<b>Brand: </b>" + proBrand + "<br> <b>Price Unit: </b>" + proPriceUnit + "<br> <b>Info: </b>" + proinfoShortDesc + " " + proinfoDesc + "<br> <b>Description: </b>" + proDesc + "<br> <b>Features: </b>" + proFeatures + ""
+  var proDescription = "<b>Brand: </b>" + proBrand + "<br> <b>Price Unit: </b>" + proPriceUnit + "<br> <b>Info: </b>" + proinfoShortDesc + " " + proinfoDesc + "<br> <b>Description: <br></b>" + proDesc + "<br> <b>Features: <br></b>" + proFeatures + ""
 
   var data = JSON.stringify({
     "name": proTitle,
@@ -222,6 +243,7 @@ function catSearch() {
     }
   }
 }
+
 // END = Search Category
 function main() {
   getAllCats();

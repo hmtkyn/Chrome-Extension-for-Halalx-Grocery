@@ -32,8 +32,8 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 // END = DOM is ready and loading data
 
-// START = Get Categories
-function getAllCats() {
+// START = Get Categories 01
+function getAllCats01() {
   var data = null;
 
   var xhr = new XMLHttpRequest();
@@ -43,9 +43,9 @@ function getAllCats() {
     if (this.readyState === 4 && this.status == 200) {
       var myCats = JSON.parse(this.responseText);
       myCatsFunc(myCats);
-      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched.</h4>";
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 01</h4>";
       if (document.querySelectorAll("notif-cats-success").length >= 0) {
-        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 3000)
+        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
       }
       // START Parent Input Value
       var arr = document.querySelectorAll('.gro_all_cats_check');
@@ -57,9 +57,9 @@ function getAllCats() {
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0]
       // END Parent Input Value
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
-      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed to Fetch All Categories.</h4>";
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed to Fetch All Categories - 01</h4>";
       if (document.querySelectorAll("notif-cats-error").length >= 0) {
-        setTimeout(function () { document.getElementById('notif-cats-error').remove(); }, 3000)
+        setTimeout(function () { document.getElementById('notif-cats-error').remove(); }, 2000)
       }
       // START Parent Input Value
       document.getElementById('gro_sub_cat').innerHTML = ""
@@ -67,7 +67,10 @@ function getAllCats() {
     }
   });
 
-  xhr.open("GET", "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc");
+  var getURL01 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=90&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=1";
+
+  xhr.open("GET", getURL01);
+
   xhr.setRequestHeader("cache-control", "no-cache");
 
   xhr.send(data);
@@ -75,22 +78,16 @@ function getAllCats() {
   var out = [];
   function myCatsFunc(arr) {
     var visibles = newcats();
-    var yokmu = true;
     for (var i = 0; i < arr.length; i++) {
       var c = "style='display:none;'";
       for (var k = 0; k < visibles.length; k++) {
-        console.log(arr[i]["name"]);
-        console.log(visibles[k]);
         if (arr[i]["name"] == visibles[k]) {
           c = "checked";
-          yokmu = false;
         }
       }
-      console.log(c);
       out += '<span class="pro-cat-item" ' + c + '>' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '" ' + c + '>' + arr[i]["id"] + '<span class="gro_cat_text">' + arr[i]["name"] + '</span></span>';
     }
     document.getElementById("gro_all_cats").innerHTML = out;
-    if (yokmu) { }
   }
   function newcats() {
     var newcat = document.querySelectorAll(".gro_get_cat > .gro_get_cat_inner");
@@ -101,7 +98,78 @@ function getAllCats() {
     return arr;
   }
 }
-// END = Get Categories
+// END = Get Categories 01
+// START = Get Categories 02
+function getAllCats02() {
+  var data = null;
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4 && this.status == 200) {
+      var myCats = JSON.parse(this.responseText);
+      myCatsFunc(myCats);
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 02</h4>";
+      if (document.querySelectorAll("notif-cats-success").length >= 0) {
+        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
+      }
+      // START Parent Input Value
+      var arr = document.querySelectorAll('.gro_all_cats_check');
+      var st = [];
+      for (var i = 0; i < arr.length; i++) {
+        st[i] = arr[i].value
+      };
+      var sonuc = st.sort(function (a, b) { return b - a });
+      document.getElementById('gro_sub_cat').innerHTML = sonuc[0]
+      // END Parent Input Value
+    } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed to Fetch All Categories - 02</h4>";
+      if (document.querySelectorAll("notif-cats-error").length >= 0) {
+        setTimeout(function () { document.getElementById('notif-cats-error').remove(); }, 2000)
+      }
+      // START Parent Input Value
+      document.getElementById('gro_sub_cat').innerHTML = ""
+      // END Parent Input Value
+    }
+  });
+
+  var getURL02 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=90&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=2";
+
+  xhr.open("GET", getURL02);
+
+  xhr.setRequestHeader("cache-control", "no-cache");
+
+  xhr.send(data);
+
+  var out = [];
+  function myCatsFunc(arr) {
+    var visibles = newcats();
+    for (var i = 0; i < arr.length; i++) {
+      var c = "style='display:none;'";
+      for (var k = 0; k < visibles.length; k++) {
+        if (arr[i]["name"] == visibles[k]) {
+          c = "checked";
+        }
+      }
+      out += '<span class="pro-cat-item" ' + c + '>' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '" ' + c + '>' + arr[i]["id"] + '<span class="gro_cat_text">' + arr[i]["name"] + '</span></span>';
+    }
+    document.getElementById("gro_all_cats").innerHTML = out;
+  }
+  function newcats() {
+    var newcat = document.querySelectorAll(".gro_get_cat > .gro_get_cat_inner");
+    var arr = [];
+    for (var i = 0; i < newcat.length; i++) {
+      arr.push(newcat[i].innerHTML);
+    }
+    return arr;
+  }
+}
+// END = Get Categories 02
+function getAllCats() {
+  getAllCats01();
+  getAllCats02();
+}
 // START = Create Category
 function postCategory() {
   var data = new FormData();

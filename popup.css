@@ -194,7 +194,7 @@ span.gro_get_cat {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: row;
-  padding: 0;
+  padding: 0.1rem;
   margin: 0 0 0.1rem 0;
 }
 span.gro_cat_text {

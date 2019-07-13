@@ -33,8 +33,6 @@ window.addEventListener('DOMContentLoaded', () => {
 // END = DOM is ready and loading data
 
 // START = Get Categories
-
-
 function newCats() {
   var newcat = document.querySelectorAll(".gro_get_cat > .gro_get_cat_inner");
   var arr = [];
@@ -43,44 +41,6 @@ function newCats() {
   }
   return arr;
 }
-
-/* function conCats01() {
-  var xhr = new XMLHttpRequest();
-  var url01 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=90&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=1";
-  xhr.withCredentials = true;
-  xhr.addEventListener("load", function renderCats() {
-    if (this.readyState === 4 && this.status == 200) {
-      var arr = JSON.parse(this.responseText);
-      return console.log(arr);
-    } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
-      return console.log("1. cat yüklenmedi");
-    }
-  });
-  xhr.open("GET", url01);
-  xhr.setRequestHeader("cache-control", "no-cache");
-  xhr.send();
-}
-
-function conCats02() {
-  var xhr = new XMLHttpRequest();
-  var url02 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=90&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=2";
-  xhr.withCredentials = true;
-  xhr.addEventListener("load", function renderCats() {
-    if (this.readyState === 4 && this.status == 200) {
-      var arr = JSON.parse(this.responseText);
-      return console.log(arr);
-    } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
-      return console.log("2. cat yüklenmedi");
-    }
-  });
-  xhr.open("GET", url02);
-  xhr.setRequestHeader("cache-control", "no-cache");
-  xhr.send();
-}
-
-conCats01().concat(conCats02());
-console.log(conArr); */
-
 
 function getCats01() {
   var xhr = new XMLHttpRequest();
@@ -107,11 +67,11 @@ function getCats01() {
       }
       renderCatsContent(resCats);
       //
-      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 01</h4>";
+      /*       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 01</h4>"; */
       //
-      if (document.querySelectorAll("#notif-cats-success").length > 0) {
-        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
-      }
+      /*       if (document.querySelectorAll("#notif-cats-success").length > 0) {
+              setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
+            } */
       //
       var arr = document.querySelectorAll('.gro_all_cats_check');
       //
@@ -165,11 +125,11 @@ function getCats02() {
       }
       renderCatsContent(resCats);
       //
-      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 02</h4>";
+      /*       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 02</h4>"; */
       //
-      if (document.querySelectorAll("#notif-cats-success").length > 0) {
-        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
-      }
+      /*       if (document.querySelectorAll("#notif-cats-success").length > 0) {
+              setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
+            } */
       //
       var arr = document.querySelectorAll('.gro_all_cats_check');
       //
@@ -198,11 +158,71 @@ function getCats02() {
   xhr.send();
 }
 
+function getCats03() {
+  var xhr = new XMLHttpRequest();
+  var url03 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=3";
+  xhr.withCredentials = true;
+  xhr.addEventListener("load", function renderCats() {
+    if (this.readyState === 4 && this.status == 200) {
+      //
+      var resCats = JSON.parse(this.responseText);
+      //
+      function renderCatsContent(arr) {
+        var out = [];
+        var visibles = newCats();
+        for (var i = 0; i < arr.length; i++) {
+          var c = "style='display:none;'";
+          for (var k = 0; k < visibles.length; k++) {
+            if (arr[i]["name"] == visibles[k]) {
+              c = "checked";
+            }
+          }
+          out += '<span class="pro-cat-item" ' + c + '>' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '" ' + c + '>' + arr[i]["id"] + '<span class="gro_cat_text">' + arr[i]["name"] + '</span></span>';
+        }
+        return document.getElementById("gro_all_cats03").innerHTML = out;
+      }
+      renderCatsContent(resCats);
+      //
+      /*       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 03</h4>"; */
+      //
+      /*       if (document.querySelectorAll("#notif-cats-success").length > 0) {
+              setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
+            } */
+      //
+      var arr = document.querySelectorAll('.gro_all_cats_check');
+      //
+      var st = [];
+      //
+      for (var i = 0; i < arr.length; i++) {
+        st[i] = arr[i].value
+      };
+      //
+      var sonuc = st.sort(function (a, b) { return b - a });
+      //
+      document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
+    } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
+      //
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed to Fetch All Categories - 03</h4>";
+      //
+      if (document.querySelectorAll("#notif-cats-error").length > 0) {
+        setTimeout(function () { document.getElementById('notif-cats-error').remove(); }, 2000)
+      }
+      //
+      document.getElementById('gro_sub_cat').innerHTML = "";
+    }
+  });
+  xhr.open("GET", url03);
+  xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send();
+}
+
 function getAllCats() {
   getCats01();
   getCats02();
+  getCats03();
 }
 // END = Get Categories
+
 // START = Create Category
 function postCategory() {
   var data = new FormData();
@@ -241,6 +261,7 @@ function postCategory() {
 
 }
 // END = Create Category
+
 // START = Create Product
 function postProduct() {
   var proTitle = document.getElementById("gro_title").textContent;
@@ -300,7 +321,7 @@ function postProduct() {
       console.log(this.responseText);
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, added product.</h4>";
       if (document.querySelectorAll("#notif-cats-success").length > 0) {
-        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 3000)
+        setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 5000)
       }
     } else if (this.readyState == 4 && this.status == 400) {
       console.log(this.responseText);
@@ -308,7 +329,7 @@ function postProduct() {
       console.log("Aynı ürün ekli zaten");
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-warning'>Product already added.</h4>";
       if (document.querySelectorAll("#notif-cats-warning").length > 0) {
-        setTimeout(function () { document.getElementById('notif-cats-warning').remove(); }, 3000)
+        setTimeout(function () { document.getElementById('notif-cats-warning').remove(); }, 5000)
       }
     } else if (this.status == 403 || this.status == 404) {
       console.log(this.responseText);
@@ -327,28 +348,9 @@ function postProduct() {
   xhr.send(data);
 }
 // END = Create Product
-// START = Search Category
-/* function catSearch() {
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById("gro_cat_search");
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("gro_all_cats");
-  li = ul.getElementsByClassName("pro-cat-item");
-  for (i = 0; i < li.length; i++) {
-    a = li[i];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-} */
-// END = Search Category
+
 function main() {
   getAllCats();
-  // catSearch();
-  // document.getElementById("gro_cat_search").addEventListener("keyup", catSearch);
   document.getElementById("gro_get_all_cats").addEventListener("click", getAllCats);
   document.getElementById("gro_post_cat").addEventListener("click", postCategory);
   document.getElementById("gro_submit").addEventListener("click", postProduct);

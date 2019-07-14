@@ -81,7 +81,7 @@ function getCats01() {
         st[i] = arr[i].value
       };
       //
-      var sonuc = st.sort(function (a, b) { return a - b });
+      var sonuc = st.sort(function (a, b) { return b - a });
       //
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
@@ -139,7 +139,7 @@ function getCats02() {
         st[i] = arr[i].value
       };
       //
-      var sonuc = st.sort(function (a, b) { return a - b });
+      var sonuc = st.sort(function (a, b) { return b - a });
       //
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
@@ -197,7 +197,7 @@ function getCats03() {
         st[i] = arr[i].value
       };
       //
-      var sonuc = st.sort(function (a, b) { return a - b });
+      var sonuc = st.sort(function (a, b) { return b - a });
       //
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {

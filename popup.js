@@ -289,7 +289,7 @@ function postProduct() {
     return newPrice.toFixed(2).toString()
   }
   function proCats() {
-    var cats = document.querySelectorAll("#gro_all_cats01 > span > input:checked, #gro_all_cats02 > span > input:checked");
+    var cats = document.querySelectorAll("#gro_all_cats01 > span > input:checked, #gro_all_cats02 > span > input:checked, #gro_all_cats03 > span > input:checked");
     var catsvalue = [];
     var i = 0;
     for (i; i < cats.length; i++) {

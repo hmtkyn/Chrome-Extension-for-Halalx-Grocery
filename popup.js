@@ -37,7 +37,7 @@ function newCats() {
   var newcat = document.querySelectorAll(".gro_get_cat > .gro_get_cat_inner");
   var arr = [];
   for (var i = 0; i < newcat.length; i++) {
-    arr.push(newcat[i].innerHTML);
+    arr.push(newcat[i].innerHTML.trim());
   }
   return arr;
 }
@@ -238,14 +238,20 @@ function postCategory() {
   xhr.withCredentials = true;
 
   xhr.addEventListener("load", function () {
-    if (this.readyState === 4) {
+    if (this.readyState == 4 && this.status == 201) {
       console.log(this.responseText);
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, added category.</h4>";
       getAllCats();
       if (document.querySelectorAll("#notif-cats-success").length > 0) {
         setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 3000)
       }
-    } else if (this.status == 400 || this.status == 403 || this.status == 404) {
+    } else if (this.status == 400) {
+      console.log(this.responseText);
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-warning'>Category already added.</h4>";
+      if (document.querySelectorAll("#notif-cats-warning").length > 0) {
+        setTimeout(function () { document.getElementById('notif-cats-warning').remove(); }, 3000)
+      }
+    } else if (this.status == 403 || this.status == 404) {
       console.log(this.responseText);
       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed, could not add category.</h4>";
       if (document.querySelectorAll("#notif-cats-error").length > 0) {

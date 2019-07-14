@@ -44,7 +44,7 @@ function newCats() {
 
 function getCats01() {
   var xhr = new XMLHttpRequest();
-  var url01 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=1";
+  var url01 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=asc&page=1";
   xhr.withCredentials = true;
   xhr.addEventListener("load", function renderCats() {
     if (this.readyState === 4 && this.status == 200) {
@@ -81,7 +81,7 @@ function getCats01() {
         st[i] = arr[i].value
       };
       //
-      var sonuc = st.sort(function (a, b) { return b - a });
+      var sonuc = st.sort(function (a, b) { return a - b });
       //
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
@@ -102,7 +102,7 @@ function getCats01() {
 
 function getCats02() {
   var xhr = new XMLHttpRequest();
-  var url02 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=2";
+  var url02 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=asc&page=2";
   xhr.withCredentials = true;
   xhr.addEventListener("load", function renderCats() {
     if (this.readyState === 4 && this.status == 200) {
@@ -139,7 +139,7 @@ function getCats02() {
         st[i] = arr[i].value
       };
       //
-      var sonuc = st.sort(function (a, b) { return b - a });
+      var sonuc = st.sort(function (a, b) { return a - b });
       //
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
@@ -160,7 +160,7 @@ function getCats02() {
 
 function getCats03() {
   var xhr = new XMLHttpRequest();
-  var url03 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=desc&page=3";
+  var url03 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=asc&page=3";
   xhr.withCredentials = true;
   xhr.addEventListener("load", function renderCats() {
     if (this.readyState === 4 && this.status == 200) {
@@ -197,7 +197,7 @@ function getCats03() {
         st[i] = arr[i].value
       };
       //
-      var sonuc = st.sort(function (a, b) { return b - a });
+      var sonuc = st.sort(function (a, b) { return a - b });
       //
       document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
     } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {

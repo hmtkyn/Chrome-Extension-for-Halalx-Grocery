@@ -1,49 +1,49 @@
 {
-  "name": "WM Bot",
-  "version": "1.9.8",
-  "description": "WM Bot for Halalx Grocery",
-  "permissions": [
-    "activeTab",
-    "declarativeContent",
-    "storage",
-    "https://halalx.com/",
-    "http://halalx.com/"
-  ],
-  "options_page": "options.html",
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.walmart.ca/*"
-      ],
-      "run_at": "document_idle",
-      "all_frames": false,
-      "js": [
-        "content.js"
-      ]
-    }
-  ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
-  },
-  "page_action": {
-    "default_popup": "popup.html",
-    "default_title": "WM Bot",
-    "default_icon": {
-      "16": "img/logo-16x16.png",
-      "32": "img/logo-32x32.png",
-      "48": "img/logo-48x48.png",
-      "128": "img/logo-128x128.png"
-    }
-  },
-  "icons": {
-    "16": "img/logo-16x16.png",
-    "32": "img/logo-32x32.png",
-    "48": "img/logo-48x48.png",
-    "128": "img/logo-128x128.png"
-  },
-  "manifest_version": 2
+	"name": "WM Bot",
+	"version": "1.9.9",
+	"description": "WM Bot for Halalx Grocery",
+	"permissions": [
+		"activeTab",
+		"declarativeContent",
+		"storage",
+		"https://halalx.com/",
+		"http://halalx.com/"
+	],
+	"options_page": "options.html",
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.walmart.ca/*"
+			],
+			"run_at": "document_idle",
+			"all_frames": false,
+			"js": [
+				"content.js"
+			]
+		}
+	],
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+	"background": {
+		"scripts": [
+			"background.js"
+		],
+		"persistent": false
+	},
+	"page_action": {
+		"default_popup": "popup.html",
+		"default_title": "WM Bot",
+		"default_icon": {
+			"16": "img/logo-16x16.png",
+			"32": "img/logo-32x32.png",
+			"48": "img/logo-48x48.png",
+			"128": "img/logo-128x128.png"
+		}
+	},
+	"icons": {
+		"16": "img/logo-16x16.png",
+		"32": "img/logo-32x32.png",
+		"48": "img/logo-48x48.png",
+		"128": "img/logo-128x128.png"
+	},
+	"manifest_version": 2
 }

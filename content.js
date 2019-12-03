@@ -39,7 +39,8 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
       state_url: window.location["href"],
       state_long_desc: document.getElementsByClassName('description')[1].innerText,
       state_bullets: document.getElementsByClassName('bullets')[0].innerText,
-      state_sku: document.getElementsByClassName('identifier-text')[1].innerHTML
+      state_sku: document.getElementsByClassName('identifier-text')[1].innerHTML,
+      state_upc: document.getElementsByClassName('identifier-text')[2].innerHTML
     };
     response(domInfo);
   }

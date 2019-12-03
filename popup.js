@@ -44,7 +44,7 @@ function newCats() {
 
 function getCats01() {
   var xhr = new XMLHttpRequest();
-  var url01 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=asc&page=1";
+  var url01 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_c33942b6f834751534f608d6ea7bc8034bbf5c54&consumer_secret=cs_c5cf3e7f4b72b7e1d5e93d9b46ea101c17ffff0d&orderby=id&order=asc&page=1";
   xhr.withCredentials = true;
   xhr.addEventListener("load", function renderCats() {
     if (this.readyState === 4 && this.status == 200) {
@@ -102,7 +102,7 @@ function getCats01() {
 
 function getCats02() {
   var xhr = new XMLHttpRequest();
-  var url02 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=asc&page=2";
+  var url02 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_c33942b6f834751534f608d6ea7bc8034bbf5c54&consumer_secret=cs_c5cf3e7f4b72b7e1d5e93d9b46ea101c17ffff0d&orderby=id&order=asc&page=2";
   xhr.withCredentials = true;
   xhr.addEventListener("load", function renderCats() {
     if (this.readyState === 4 && this.status == 200) {
@@ -160,7 +160,7 @@ function getCats02() {
 
 function getCats03() {
   var xhr = new XMLHttpRequest();
-  var url03 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1&orderby=id&order=asc&page=3";
+  var url03 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_c33942b6f834751534f608d6ea7bc8034bbf5c54&consumer_secret=cs_c5cf3e7f4b72b7e1d5e93d9b46ea101c17ffff0d&orderby=id&order=asc&page=3";
   xhr.withCredentials = true;
   xhr.addEventListener("load", function renderCats() {
     if (this.readyState === 4 && this.status == 200) {
@@ -216,10 +216,69 @@ function getCats03() {
   xhr.send();
 }
 
+function getCats04() {
+  var xhr = new XMLHttpRequest();
+  var url04 = "https://halalx.com/grocery/wp-json/wc/v3/products/categories?per_page=100&consumer_key=ck_c33942b6f834751534f608d6ea7bc8034bbf5c54&consumer_secret=cs_c5cf3e7f4b72b7e1d5e93d9b46ea101c17ffff0d&orderby=id&order=asc&page=4";
+  xhr.withCredentials = true;
+  xhr.addEventListener("load", function renderCats() {
+    if (this.readyState === 4 && this.status == 200) {
+      //
+      var resCats = JSON.parse(this.responseText);
+      //
+      function renderCatsContent(arr) {
+        var out = [];
+        var visibles = newCats();
+        for (var i = 0; i < arr.length; i++) {
+          var c = "style='display:none;'";
+          for (var k = 0; k < visibles.length; k++) {
+            if (arr[i]["name"] == visibles[k]) {
+              c = "checked";
+            }
+          }
+          out += '<span class="pro-cat-item" ' + c + '>' + i + '. <input type="checkbox" class="gro_all_cats_check" name="gro-' + arr[i]["id"] + '" value="' + arr[i]["id"] + '" ' + c + '>' + arr[i]["id"] + '<span class="gro_cat_text">' + arr[i]["name"] + '</span></span>';
+        }
+        return document.getElementById("gro_all_cats04").innerHTML = out;
+      }
+      renderCatsContent(resCats);
+      //
+      /*       document.getElementById('notif').innerHTML = "<h4 id='notif-cats-success'>Successful, All Categories Fetched - 03</h4>"; */
+      //
+      /*       if (document.querySelectorAll("#notif-cats-success").length > 0) {
+              setTimeout(function () { document.getElementById('notif-cats-success').remove(); }, 2000)
+            } */
+      //
+      var arr = document.querySelectorAll('.gro_all_cats_check');
+      //
+      var st = [];
+      //
+      for (var i = 0; i < arr.length; i++) {
+        st[i] = arr[i].value
+      };
+      //
+      var sonuc = st.sort(function (a, b) { return b - a });
+      //
+      document.getElementById('gro_sub_cat').innerHTML = sonuc[0];
+    } else if (this.status == 400 || this.status == 401 || this.status == 404 || this.status == 405 || this.status == 409 || this.status == 500 || this.status == 503) {
+      //
+      document.getElementById('notif').innerHTML = "<h4 id='notif-cats-error'>Failed to Fetch All Categories - 04</h4>";
+      //
+      if (document.querySelectorAll("#notif-cats-error").length > 0) {
+        setTimeout(function () { document.getElementById('notif-cats-error').remove(); }, 2000)
+      }
+      //
+      document.getElementById('gro_sub_cat').innerHTML = "";
+    }
+  });
+  xhr.open("GET", url04);
+  xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send();
+}
+
 function getAllCats() {
   getCats01();
   getCats02();
   getCats03();
+  getCats04();
 }
 // END = Get Categories
 
@@ -260,7 +319,7 @@ function postCategory() {
     }
   });
 
-  xhr.open("POST", "https://halalx.com/grocery/wp-json/wc/v3/products/categories?consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1");
+  xhr.open("POST", "https://halalx.com/grocery/wp-json/wc/v3/products/categories?consumer_key=ck_c33942b6f834751534f608d6ea7bc8034bbf5c54&consumer_secret=cs_c5cf3e7f4b72b7e1d5e93d9b46ea101c17ffff0d");
   xhr.setRequestHeader("cache-control", "no-cache");
 
   xhr.send(data);
@@ -275,6 +334,7 @@ function postProduct() {
   var proPriceUnit = document.getElementById("gro_price_unit").textContent;
   var proBrand = document.getElementById("gro_brand").textContent;
   var proSKU = document.getElementById("gro_sku").textContent;
+  var proUPC = document.getElementById("gro_upc").textContent;
   var proinfoShortDesc = document.getElementById("gro_short_desc").innerText;
   var proinfoDesc = document.getElementById("gro_desc").innerText;
   var proDesc = document.getElementById("gro_long_desc").textContent;
@@ -347,7 +407,7 @@ function postProduct() {
     }
   });
 
-  xhr.open("POST", "https://halalx.com/grocery/wp-json/wc/v3/products?consumer_key=ck_b6e81d8ac63380180906013d74a5888060013299&consumer_secret=cs_8ed663f730dc3907226476f29c74b8491900d1c1");
+  xhr.open("POST", "https://halalx.com/grocery/wp-json/wc/v3/products?consumer_key=ck_c33942b6f834751534f608d6ea7bc8034bbf5c54&consumer_secret=cs_c5cf3e7f4b72b7e1d5e93d9b46ea101c17ffff0d");
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Cache-Control", "no-cache");
 
